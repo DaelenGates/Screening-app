@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Connect Across Tacoma Screening app</title>
+    <!--CSS BLOCK-->
+    <!-- Load in styles.css -->
+    <link rel="stylesheet" type"text/css" href="styles.css">
+    <!-- input the Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+      integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+      crossorigin=""/>
+    <!-- leflet-geosearch css -->
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
+    />
+    <!-- geoapify css  -->
+    <link rel="stylesheet" href="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.css" />
+
+    <!-- js block-->
+    <!-- leaflet js -->
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+      integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+      crossorigin=""></script>
+    <!-- leflet-goesearch js -->
+    <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
+
+    <!-- TEST leflet-control-geocoder -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script> 
+
+    <!-- Geoapify js -->
+    <script src="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.js"></script>
+
+    <!-- Turf booleanPointInPolygon js  -->
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.1.1/umd/turf.min.js"></script> -->
+
+
+
+
+
+
+
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <!-- Load in the census tracts Geojson  -->
+    <script type="text/javascript" src="geojsons/join_shp.js"></script>
+    
+    <!-- js -->
+    <script type="module" src="scripts.js"></script>
+  </body>
+</html>

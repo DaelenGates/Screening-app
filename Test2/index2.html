@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Geocoder Example</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.2/leaflet.css"
+  />
+  <style>
+    #map {
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.2/leaflet.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css"
+  />
+
+  <script>
+    // Initialize Leaflet map
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // Create a Tile Layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Initialize geocoder
+    var geocoder = L.Control.geocoder({
+      defaultMarkGeocode: true,
+      geocoder: L.Control.Geocoder.mapbox('pk.eyJ1IjoiZGFlbGVuZyIsImEiOiJjbDl5d3h6NzkwOTdoM29xb20xYzJ3NmZsIn0.sMhj9jD84igqnZdX08l33A')
+    }).addTo(map);
+
+    // Handle geocode result event
+    geocoder.on('markgeocode', function (e) {
+      console.log(e);
+      // Use the e.geocode object to access the geocode result
+    });
+  </script>
+</body>
+</html>
