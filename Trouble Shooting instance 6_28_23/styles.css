@@ -1,0 +1,48 @@
+body {
+  background-color: rgb(80, 138, 75);
+  color: white;
+  padding: 10px;
+  margin: 0;
+  font-family: Calibri, sans-serif;
+  
+}
+
+div {
+  font-size: 1.1em;
+  color: black;
+
+}
+
+#map {
+  /* position: absolute; */
+  width: 98vw;
+  height: 98vh;
+  border-radius: 10px;
+}
+
+#map2 {
+
+  width: 98vw;
+  height: 85vh;
+  border-radius: 10px;
+}
+h1{
+  background-color: green;
+  margin-right:20%;
+  border-radius: 8px;
+}
+p1{
+  font-size: 20;
+}
+h1{
+  font-size:30;
+}
+a:link {
+  color: white;
+  background-color: transparent;
+}
+a:visited {
+  color: rgb(56, 39, 133);
+  background-color: transparent;
+}
+
