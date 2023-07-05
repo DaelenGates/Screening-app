@@ -1,7 +1,15 @@
 // js for map 
 var map = L.map('map').setView([47.2452,-122.4582],12);
+map.removeControl(map.zoomControl);
+L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
-var marker = null;
+// var marker = null;
+// This sets the marker, but still looking for a way to have no marker set 
+var latlng = L.latLng(0,0);
+var marker = L.marker(latlng,{
+  draggable: false,
+  autoPan: true
+}).addTo(map);
 
 var myAPIKey = "f5b6e12c640547b1bfedad5fc4a1456f"; // Get an API Key on https://myprojects.geoapify.com
 
@@ -74,3 +82,34 @@ const addressSearchControl = L.control.addressSearch(myAPIKey, {
 });
 map.addControl(addressSearchControl);
 
+// This section will add an on click function that allows the marker to be placed manually
+map.on('click', function (e) {
+  // This creates the marker that people see where the user clickes 
+  marker.setLatLng(e.latlng);
+  // Creates a turf point that can be tested out of the marcer location location 
+  var pt = turf.point([marker.getLatLng().lng, marker.getLatLng().lat])
+  // This iterates through the applicable census tracts and asks IF pt is inside of any of them one at at time 
+  var turfPolygons = [];
+  var count = (0);
+  var bool3 = (false);
+  var boolf = (true);
+  tract.features.forEach(function(feature) {
+    var polygon = turf.polygon(feature.geometry.coordinates);
+    turfPolygons = (polygon);
+    bool3 = turf.booleanPointInPolygon(pt, turfPolygons);
+    count = (count + 1);
+    // console.log("boolf = " + boolf)
+    // console.log ("bool3 = " + bool3)
+    if (bool3) {
+        boolf = (false);
+        alert("This census address is applicable.");
+        
+    }
+  });
+  if (boolf) {
+    alert("This census address IS NOT applicable");
+  }
+  // this sets the latlng variable which stores the lat lon ponints for where the user clicks, but idk if its used 
+  latlng = L.latLng(marker.getLatLng().lat, marker.getLatLng().lng);
+  // console.log(latlng);
+  }); 
