@@ -45,4 +45,17 @@ a:visited {
   color: rgb(56, 39, 133);
   background-color: transparent;
 }
+.text-box {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 14px;
+}
+#textbox-container {
+  position: absolute;
+  top: 10px; /* Adjust the value to set the desired distance from the top */
+  left: 10px; /* Adjust the value to set the desired distance from the left */
+}
+
 

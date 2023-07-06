@@ -30,7 +30,7 @@ var tracts = L.geoJson(tract,{
 
 // Add Geoapify Address Search control 
 const addressSearchControl = L.control.addressSearch(myAPIKey, {
-  position: 'topright',
+  position: 'topleft',
   resultCallback: (address) => {
     // if there is currently a marker clear it 
     if (marker) {
@@ -39,6 +39,9 @@ const addressSearchControl = L.control.addressSearch(myAPIKey, {
     // if there is not a address nothing is returned 
     if (!address) {
       return;
+    }
+    if (textBoxControl) {
+      textBoxControl.remove();
     }
 
     // testing lat lon for later use 
@@ -58,14 +61,13 @@ const addressSearchControl = L.control.addressSearch(myAPIKey, {
       count = (count + 1);
       if (bool3) {
         boolf = (false);
-        alert("This census address is applicable.");
-        
+        createTextBoxControl("This address IS eligible");
       }
     });
     if (boolf) {
-      alert("This census address IS NOT applicable");
+      createTextBoxControl("This address IS NOT eligible");
     }
-
+    // This will log the number of census tracts its looking through
     console.log(count);
     // adds marker to map at the point of the address 
     marker = L.marker([address.lat, address.lon]).addTo(map);
@@ -82,12 +84,18 @@ const addressSearchControl = L.control.addressSearch(myAPIKey, {
 });
 map.addControl(addressSearchControl);
 
+
 // This section will add an on click function that allows the marker to be placed manually
 map.on('click', function (e) {
   // This creates the marker that people see where the user clickes 
   marker.setLatLng(e.latlng);
   // Creates a turf point that can be tested out of the marcer location location 
   var pt = turf.point([marker.getLatLng().lng, marker.getLatLng().lat])
+
+  // Remove the existing text box control if it exists
+  if (textBoxControl) {
+    textBoxControl.remove();
+  }
   // This iterates through the applicable census tracts and asks IF pt is inside of any of them one at at time 
   var turfPolygons = [];
   var count = (0);
@@ -101,15 +109,43 @@ map.on('click', function (e) {
     // console.log("boolf = " + boolf)
     // console.log ("bool3 = " + bool3)
     if (bool3) {
-        boolf = (false);
-        alert("This census address is applicable.");
-        
+      boolf = (false);
+      createTextBoxControl("This address IS eligible");
     }
   });
+  // this will log the number of census tracts searched through 
+  console.log(count);
   if (boolf) {
-    alert("This census address IS NOT applicable");
+    createTextBoxControl("This address IS NOT eligible");
   }
   // this sets the latlng variable which stores the lat lon ponints for where the user clicks, but idk if its used 
   latlng = L.latLng(marker.getLatLng().lat, marker.getLatLng().lng);
   // console.log(latlng);
   }); 
+
+  // Testing text box 
+
+// Define the text box control outside the click event handler this allows me to pass the function inside my click event listener and the geosearch
+var textBoxControl;
+
+// Create the text box control
+function createTextBoxControl(content) {
+  // Remove the existing text box control if it exists
+  if (textBoxControl) {
+    textBoxControl.remove();
+  }
+
+  // Create the new text box control
+  textBoxControl = L.control({ position: 'topright' });
+
+  // Define the content of the text box
+  textBoxControl.onAdd = function(map) {
+    var textBox = L.DomUtil.create('div', 'text-box');
+    textBox.innerHTML = content;
+
+    return textBox;
+  };
+
+  // Add the text box control to the map
+  textBoxControl.addTo(map);
+}
