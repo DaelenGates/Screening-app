@@ -128,9 +128,9 @@ map.on('click', function (e) {
 // Define the text box control outside the click event handler this allows me to pass the function inside my click event listener and the geosearch
 var textBoxControl;
 
-// Create the text box control
+// Creates the text box control function, this is used above to tell the user if they are eligbable or not.
 function createTextBoxControl(content) {
-  // Remove the existing text box control if it exists
+  // Removes the existing text box control if it exists
   if (textBoxControl) {
     textBoxControl.remove();
   }
